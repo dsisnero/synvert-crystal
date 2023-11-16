@@ -15,7 +15,7 @@ Synvert::Rewriter.new 'crystal', 'rspec_describe_to_describe' do
   EOS
   
   configure(parser: Synvert::PARSER_PARSER)
-  within_files '**/*.rb' do
+  within_files 'spec/**/*.{rb,cr}' do
     find_node '.send[receiver=RSpec][message=describe][arguments.size=1]' do
       delete :receiver, :dot
     end

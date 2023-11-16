@@ -13,7 +13,7 @@ Synvert::Rewriter.new 'crystal', 'eq_false_be_false' do
   EOS
   
   configure(parser: Synvert::PARSER_PARSER)
-  within_files '**/*.rb' do
+  within_files 'spec/**/*.{cr,rb}' do
     with_node node_type: 'send', receiver: { node_type: 'send', receiver: nil, message: 'expect', arguments: { size: 1, '0': { node_type: 'send' } } }, message: 'to', arguments: { size: 1, '0': { node_type: 'send', receiver: nil, message: 'eq', arguments: { size: 1, '0': false } } } do
       group do
         replace :arguments, with: 'be_false'
